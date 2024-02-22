@@ -4,7 +4,7 @@ import 'swiper/css/pagination';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/gear/SwiperTrends';
-
+export const dynamic = 'force-dynamic'
 const Gear = async () => {
   const res = await fetch(`${process.env.API_URL}/api/gear/getTrendingGear`);
   const gear = await res.json();

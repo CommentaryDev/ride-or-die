@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { FaMotorcycle } from 'react-icons/fa';
 import BackButton from '@/components/BackButton';
-
+export const dynamic = 'force-dynamic'
 const GearDetails = async ({ params }: any) => {
   const res = await fetch(`${process.env.API_URL}/api/gear/getGear`, {
     method: 'POST',

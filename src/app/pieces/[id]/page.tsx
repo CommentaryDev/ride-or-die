@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Bike, Clock, PackageCheck,RefreshCw, ChevronLeft,} from 'lucide-react'
 import { FaMotorcycle } from "react-icons/fa";
 import BackButton from "@/components/BackButton";
-
+export const dynamic = 'force-dynamic'
 const PiecesDetails = async ({params}:any) => {
     const res = await fetch(`${process.env.API_URL}/api/pieces/getPiece`,{
         method : "POST",
