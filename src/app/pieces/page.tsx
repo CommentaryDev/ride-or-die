@@ -8,7 +8,7 @@ import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/pieces/SwiperTrends';
 
 const Pieces = async () => {
-    const res = await fetch('http://localhost:3000/api/pieces/getTrendingPieces')
+    const res = await fetch(`${process.env.API_URL}/api/pieces/getTrendingPieces`)
     const piece = await res.json()
   return (
     <section className="py-8">

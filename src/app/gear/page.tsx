@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/gear/SwiperTrends';
 
 const Gear = async () => {
-  const res = await fetch('http://localhost:3000/api/gear/getTrendingGear');
+  const res = await fetch(`${process.env.API_URL}/api/gear/getTrendingGear`);
   const gear = await res.json();
 
   return (

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperAll from '@/components/pieces/SwiperAll';
 
 const AllPieces = async () => {
-  const res = await fetch('http://localhost:3000/api/pieces/getAllPieces');
+  const res = await fetch(`${process.env.API_URL}/api/pieces/getAllPieces`);
   const piece = await res.json();
   return (
     <section className='py-8'>

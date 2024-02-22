@@ -8,8 +8,8 @@ const CartProvider = ({children}:any) => {
         mode="payment"
         cartMode="client-only"
         stripe={process.env.NEXT_PUBLIC_STRIPE_KEY as string} 
-        successUrl="http://localhost:3000/stripe/success"
-        cancelUrl="http://localhost:3000/stripe/error"
+        successUrl="http://ride-or-die.benjaminroche.fr/stripe/success"
+        cancelUrl="http://ride-or-die.benjaminroche.fr/stripe/error"
         language="en-US"
         currency="EUR"
         billingAddressCollection={true}

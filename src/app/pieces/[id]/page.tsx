@@ -7,7 +7,7 @@ import { FaMotorcycle } from "react-icons/fa";
 import BackButton from "@/components/BackButton";
 
 const PiecesDetails = async ({params}:any) => {
-    const res = await fetch('http://localhost:3000/api/pieces/getPiece',{
+    const res = await fetch(`${process.env.API_URL}/api/pieces/getPiece`,{
         method : "POST",
         body: JSON.stringify(params.id),
         headers: {
