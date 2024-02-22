@@ -8,6 +8,7 @@ import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/pieces/SwiperTrends';
 
 const Pieces = async () => {
+  console.log(process.env.API_URL as string)
     const res = await fetch(`${process.env.API_URL}/api/pieces/getTrendingPieces`)
     const piece = await res.json()
   return (
