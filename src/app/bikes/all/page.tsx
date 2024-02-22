@@ -6,7 +6,7 @@ import 'swiper/css/pagination';
 import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperAll from '@/components/bikes/SwiperAll';
-
+export const dynamic = 'force-dynamic'
 const AllBikes = async () => {
     const res = await fetch('http://localhost:3000/api/bikes/getAllBikes')
     const test = await res.json()
