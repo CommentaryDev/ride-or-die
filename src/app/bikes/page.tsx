@@ -8,7 +8,7 @@ import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/bikes/SwiperTrends';
 export const dynamic = 'force-dynamic'
 const Bikes = async () => {
-    const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes')
+    const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ cache: "no-store" })
     const test = await res.json()
   return (
     <section className="py-8">
