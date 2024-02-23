@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/bikes/SwiperTrends';
 export const dynamic = 'force-dynamic'
-const Bikes = async () => {
+export default async function Bikes()  {
     const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ next: { revalidate: 30 } })
     const test = await res.json()
   return (
@@ -27,4 +27,3 @@ const Bikes = async () => {
  
   )
 }
-export default Bikes
