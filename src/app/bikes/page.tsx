@@ -6,8 +6,11 @@ import 'swiper/css/pagination';
 import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/bikes/SwiperTrends';
+import { useRouter } from 'next/router';
 export const dynamic = 'force-dynamic'
 const Bikes = async () => {
+  const router = useRouter();
+  router.replace(router.asPath);
     const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ cache: "no-store" })
     const test = await res.json()
   return (
