@@ -35,9 +35,9 @@ const PiecesDetails = async ({params}:any) => {
             <div className="flex flex-col gap-6 items-start">
               <div>
                 <h3>{piece[0].name}</h3>
-                <p className="text-lg font-semibold">A partir de  {piece[0].price}€</p>
+                <p className="text-lg font-semibold">{piece[0].price}€</p>
               </div>
-              <p></p>
+              <p>{piece[0].desc}</p>
               <AddToCartBtn 
               text="Add to cart" 
               btnStyles="btn btn-accent"

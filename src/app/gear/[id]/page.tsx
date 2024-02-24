@@ -20,7 +20,6 @@ const GearDetails = async ({ params }: any) => {
     },
   });
   const gear = await res.json();
-  console.log(gear[0].imageURL);
   return (
     <section className='pt-24 pb-32'>
       <div className='container mx-auto'>
@@ -44,10 +43,10 @@ const GearDetails = async ({ params }: any) => {
               <div>
                 <h3>{gear[0].name}</h3>
                 <p className='text-lg font-semibold'>
-                  A partir de {gear[0].price}€
+                  {gear[0].price}€
                 </p>
               </div>
-              <p></p>
+              <p>{gear[0].desc}</p>
               <AddToCartBtn
                 text='Add to cart'
                 btnStyles='btn btn-accent'

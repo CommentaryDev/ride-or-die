@@ -37,7 +37,7 @@ const BikeDetails = async ({params}:any) => {
                 <h3>{bike[0].name}</h3>
                 <p className="text-lg font-semibold">A partir de  {bike[0].price}€</p>
               </div>
-              <p></p>
+              <p>{bike[0].desc}</p>
               <AddToCartBtn 
               text="Add to cart" 
               btnStyles="btn btn-accent"

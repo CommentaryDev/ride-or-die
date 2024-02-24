@@ -23,7 +23,7 @@ const BikeCard = ({ bike }: any) => {
             icon={<CgShoppingBag />}
             name={bike.name}
             currency='USD'
-            description={bike.description}
+            description={bike.desc}
             images={bike.imageURL}
             price={bike.price}
           />
