@@ -6,7 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/gear/SwiperTrends';
 export const dynamic = 'force-dynamic'
 const Gear = async () => {
-  const res = await fetch(`http://localhost:3000/api/gear/getTrendingGear`);
+  const res = await fetch(`http://localhost:3000/api/gear/getTrendingGear`,{ 
+    method: 'POST', 
+    cache: 'no-cache'
+  });
   const gear = await res.json();
 
   return (

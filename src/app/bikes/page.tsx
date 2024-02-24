@@ -7,11 +7,12 @@ import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/bikes/SwiperTrends';
 import { useRouter } from 'next/navigation';
-import { cookies } from 'next/headers';
 export const dynamic = 'force-dynamic'
 export default async function Bikes()  {
-    cookies();
-    const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ cache: 'force-cache' });
+    const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ 
+      method: 'POST', 
+      cache: 'no-cache'
+    });
     const test = await res.json();
   return (
     <section className="py-8">

@@ -6,7 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperAll from '@/components/gear/SwiperAll';
 export const dynamic = 'force-dynamic'
 const AllGear = async () => {
-  const res = await fetch(`http://localhost:3000/api/gear/getAllGear`);
+  const res = await fetch(`http://localhost:3000/api/gear/getAllGear`,{ 
+    method: 'POST', 
+    cache: 'no-cache'
+  });
   const gear = await res.json();
   return (
     <section className='py-8'>
