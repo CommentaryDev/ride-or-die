@@ -4,7 +4,7 @@ import AddToCartBtn from '../AddToCartBtn';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CgEye, CgShoppingBag } from 'react-icons/cg';
-
+export const dynamic = 'force-dynamic'
 const BikeCard = ({ bike }: any) => {
   return (
     <div className='group' key={bike.id}>

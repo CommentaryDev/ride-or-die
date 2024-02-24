@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import BikeCard from './BikeCard';
+export const dynamic = 'force-dynamic'
 const SwiperTrends = ({test} : any) => {
   return (
     <Swiper slidesPerView={1} spaceBetween={30} breakpoints={{ 

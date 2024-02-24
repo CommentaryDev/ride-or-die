@@ -8,7 +8,6 @@ import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperTrends from '@/components/bikes/SwiperTrends';
 import { useRouter } from 'next/navigation';
 export const dynamic = 'force-dynamic'
-export const revalidate = 0
 export default async function Bikes()  {
     const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ cache: 'force-cache' });
     const test = await res.json();
