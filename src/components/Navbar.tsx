@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { BsSearch } from 'react-icons/bs';
 import { ImCart } from 'react-icons/im';
 import { FiMenu } from 'react-icons/fi';
@@ -33,8 +33,10 @@ import {
 } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
-
-const Navbar = () => {
+import { useSession } from 'next-auth/react';
+export default function Navbar  ()  {
+  const { data: session, status } = useSession();
+  console.log(session)
   const links = [
     { id: '1', name: 'Home', href: '/' },
     { id: '2', name: 'Bikes', href: '/bikes' },
@@ -105,12 +107,15 @@ const Navbar = () => {
             <DropdownMenuContent className='w-56'>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>My Orders</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Log In</DropdownMenuItem>
+              {session ? (
+                 <DropdownMenuItem>
+                  <Link href="/api/auth/signout">Se Déconnecter</Link>
+                  </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem>
+                <Link href="/api/auth/signin">Se Connecter</Link>
+                </DropdownMenuItem>
+            )}
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -125,4 +130,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

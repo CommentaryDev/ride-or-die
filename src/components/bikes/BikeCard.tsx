@@ -6,6 +6,13 @@ import Link from 'next/link';
 import { CgEye, CgShoppingBag } from 'react-icons/cg';
 export const dynamic = 'force-dynamic'
 const BikeCard = ({ bike }: any) => {
+  const test = parseFloat(bike.price as string);
+const formatted = new Intl.NumberFormat("fr", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: test % 1 === 0 ? 0 : 2, // Check if the number has fractional part
+}).format(test);
+
   return (
     <div className='group' key={bike.id}>
       <div className='border h-[328px] mb-5 p-4 overflow-hidden relative'>
@@ -36,7 +43,7 @@ const BikeCard = ({ bike }: any) => {
       </div>
       <h4 className='mb-1'>{bike.name}</h4>
       <div className='text-lg font-bold text-accent'>
-        A partir de {bike.price} €
+        A partir de {formatted} 
       </div>
     </div>
   );

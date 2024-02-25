@@ -6,7 +6,7 @@ import CartProvider from "@/components/CartProvider";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { Inter, Rajdhani } from "next/font/google";
-
+import SessionWrapper from "@/components/SessionWrapper";
 const rajdhani = Rajdhani({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -23,6 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionWrapper>
     <html lang="en">
       <body className={rajdhani.variable}>
       <CartProvider>
@@ -34,5 +35,6 @@ export default function RootLayout({
         </CartProvider>
       </body>
     </html>
+    </SessionWrapper>
   );
 }
