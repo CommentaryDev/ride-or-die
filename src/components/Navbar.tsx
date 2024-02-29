@@ -36,7 +36,6 @@ import { Button } from '../components/ui/button';
 import { useSession } from 'next-auth/react';
 export default function Navbar  ()  {
   const { data: session, status } = useSession();
-  console.log(session)
   const links = [
     { id: '1', name: 'Home', href: '/' },
     { id: '2', name: 'Bikes', href: '/bikes' },

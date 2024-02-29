@@ -46,6 +46,26 @@ model Types {
   createdAt   DateTime  @default(now())
   products    Products[]
 }
+
+model Order {
+  id_order String   @id @default(uuid())
+  amount   Int 
+  nb_lines Int
+  createdAt   DateTime  @default(now())
+}
+model OrderLine{
+  id_orderline String   @id @default(uuid())
+  id_order     String
+  product_name String
+  stripe_id    String
+  quantity     Int
+  unitPrice    Int
+  lineTotal    Int
+  createdAt   DateTime  @default(now())
+}
+
+
+
 //Required from next-auth
 model Account {
   id                 String  @id @default(cuid())
