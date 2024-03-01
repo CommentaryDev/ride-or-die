@@ -8,7 +8,7 @@ import { Swiper ,SwiperSlide } from 'swiper/react';
 import SwiperAll from '@/components/bikes/SwiperAll';
 export const dynamic = 'force-dynamic'
 const AllBikes = async () => {
-    const res = await fetch('http://localhost:3000/api/bikes/getAllBikes',{ 
+    const res = await fetch(`${process.env.API_URL}/api/bikes/getAllBikes`,{ 
       method: 'POST', 
       cache: 'no-cache'
     })

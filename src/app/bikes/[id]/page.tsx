@@ -7,7 +7,7 @@ import { FaMotorcycle } from "react-icons/fa";
 import BackButton from "@/components/BackButton";
 export const dynamic = 'force-dynamic'
 const BikeDetails = async ({params}:any) => {
-    const res = await fetch('http://localhost:3000/api/bikes/getBike',{
+    const res = await fetch(`${process.env.API_URL}/api/bikes/getBike`,{
         method : "POST",
         body: JSON.stringify(params.id),
         headers: {

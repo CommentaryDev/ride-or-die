@@ -9,7 +9,7 @@ import SwiperTrends from '@/components/bikes/SwiperTrends';
 import { useRouter } from 'next/navigation';
 export const dynamic = 'force-dynamic'
 export default async function Bikes()  {
-    const res = await fetch('http://localhost:3000/api/bikes/getTrendingBikes',{ 
+    const res = await fetch(`${process.env.API_URL}/api/bikes/getTrendingBikes`,{ 
       method: 'POST', 
       cache: 'no-cache'
     });

@@ -12,8 +12,9 @@ import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
+export const dynamic = 'force-dynamic';
 async function getData() {
-  const res = await fetch(`http://localhost:3000/api/stats`, {
+  const res = await fetch(`${process.env.API_URL}/api/stats`, {
     method: 'POST',
     cache: 'no-cache',
   });

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperAll from '@/components/pieces/SwiperAll';
 export const dynamic = 'force-dynamic'
 const AllPieces = async () => {
-  const res = await fetch(`http://localhost:3000/api/pieces/getAllPieces`,{ 
+  const res = await fetch(`${process.env.API_URL}/api/pieces/getAllPieces`,{ 
     method: 'POST', 
     cache: 'no-cache'
   });
