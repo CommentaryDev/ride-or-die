@@ -42,7 +42,6 @@ export default function Navbar() {
     { id: '3', name: 'Pieces', href: '/pieces' },
     { id: '4', name: 'Gear', href: '/gear' },
     { id: '5', name: 'Take care of your bike', href: '/maintenance' },
-    { id: '6', name: 'Stats', href: '/stats' },
   ];
   const { cartCount, handleCartClick } = useShoppingCart();
   return (

@@ -20,7 +20,7 @@ const CheckoutBtn = () => {
     })*/
       if(session?.user?.email){
         try {
-        const res = await redirectToCheckout(session?.user?.email);
+        const res = await redirectToCheckout("cus_PgptKJDyQAzLkl");
 
         } catch (error) {
           console.log("err checkout", error);
