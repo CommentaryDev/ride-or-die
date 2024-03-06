@@ -51,6 +51,7 @@ model Order {
   id_order String   @id @default(uuid())
   amount   Int 
   nb_lines Int
+  user_id  String
   createdAt   DateTime  @default(now())
 }
 model OrderLine{

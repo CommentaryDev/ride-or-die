@@ -1,16 +1,31 @@
 import { useShoppingCart } from "use-shopping-cart";
+import { useSession } from 'next-auth/react';
+import prisma from "@/lib/prisma";
+import { useRouter } from "next/navigation";
 //Component the displays a checkout button and take care of taking the customer to the stripe checkout page using redirectToCheckout stripe function
 const CheckoutBtn = () => {
   const { redirectToCheckout } = useShoppingCart();
+  const { data: session } = useSession();
+  const router = useRouter();
   const handleCheckout = async () => {
-    try {
-      const res = await redirectToCheckout();
-      if (res?.error) {
-        console.log("theres", res);
-      }
-    } catch (error) {
-      console.log("err", error);
+    if(!session){
+      console.log("You're not connected")
+      router.push("http://localhost:3000/api/auth/signin");
     }
+    /*if(session?.user){
+      const user= await prisma.user.findFirst({
+      where: {
+        email: session?.user?.email,
+      }
+    })*/
+      if(session?.user?.email){
+        try {
+        const res = await redirectToCheckout(session?.user?.email);
+
+        } catch (error) {
+          console.log("err checkout", error);
+        }
+      }
   };
   
   return (

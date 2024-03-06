@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 const webhook : string = process.env.STRIPE_WEBHOOK_SECRET as string
 
-async function OrderCreate(lines : any,totalAmount : any){
+async function OrderCreate(lines : any,totalAmount : any, CustomerID: any){
   const numberItems= lines.length;
   console.log("amount",totalAmount)
   console.log("nb lines",numberItems)
@@ -11,6 +11,7 @@ async function OrderCreate(lines : any,totalAmount : any){
     data: {
       amount: totalAmount,
       nb_lines: numberItems,
+      user_id: CustomerID
     },
   });
   for (const element of lines) {
@@ -90,7 +91,7 @@ export async function POST(req: any, res: any) {
       const lineItems = sessionWithLineItems.line_items;
       console.log("extract lines",lineItems?.data)
       //Create order
-      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total )
+      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total, sessionWithLineItems?.customer)
       return Response.json(lineItems)
       break;
     default:
