@@ -10,7 +10,7 @@ const CheckoutBtn = () => {
   const handleCheckout = async () => {
     if(!session){
       console.log("You're not connected")
-      router.push("http://localhost:3000/api/auth/signin");
+      router.push("https://ride-or-die.benjaminroche.fr/api/auth/signin");
     }
     /*if(session?.user){
       const user= await prisma.user.findFirst({
