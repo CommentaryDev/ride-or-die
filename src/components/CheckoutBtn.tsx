@@ -24,7 +24,7 @@ const CheckoutBtn = () => {
 
       if (!stripe) throw new Error("Stripe failed to initialize.");
 
-      const checkoutResponse = await fetch(`${process.env.API_URL}/stripe/api/createCheckout`, {
+      const checkoutResponse = await fetch(`${process.env.API_URL}/stripe/api/stripe/createCheckout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
