@@ -107,9 +107,14 @@ export default function Navbar() {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {session ? (
+              <>
+              <DropdownMenuItem>
+                 <Link href='/orders'>Check orders</Link>
+               </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href='/api/auth/signout'>Se Déconnecter</Link>
                 </DropdownMenuItem>
+                </>
               ) : (
                 <DropdownMenuItem>
                   <Link href='/api/auth/signin'>Se Connecter</Link>
