@@ -91,7 +91,7 @@ export async function POST(req: any, res: any) {
       const lineItems = sessionWithLineItems.line_items;
       console.log("extract lines",lineItems?.data)
       //Create order
-      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total, sessionWithLineItems?.customer_email)
+      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total, sessionWithLineItems?.customer_details?.email)
       return Response.json(lineItems)
       break;
     default:
