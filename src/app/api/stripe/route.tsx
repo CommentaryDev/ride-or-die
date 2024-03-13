@@ -49,6 +49,7 @@ export async function POST(req: any, res: any) {
 
   switch (event?.type) {
     case 'payment_intent.succeeded':
+      // Handle post-payment actions here
       const session = event.data.object;
       console.log(`Payment successful for session ID: ${session.id}`);
       //Email send
@@ -69,7 +70,6 @@ export async function POST(req: any, res: any) {
         subject: "Order confirmed ",
         text: `Order number ${session.id} confirmed `,
       };
-    
       transporter.sendMail(mailOptions, function (error : any, info : any) {
         if (error) {
           console.log("error mail")
@@ -77,7 +77,6 @@ export async function POST(req: any, res: any) {
           console.log("Email Sent");
         }
       });
-      // Handle post-payment actions here
       return Response.json(session)
       break;
     // Add other event types to handle as needed
@@ -92,7 +91,7 @@ export async function POST(req: any, res: any) {
       const lineItems = sessionWithLineItems.line_items;
       console.log("extract lines",lineItems?.data)
       //Create order
-      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total, sessionWithLineItems?.customer)
+      OrderCreate(lineItems?.data, sessionWithLineItems?.amount_total, sessionWithLineItems?.customer_email)
       return Response.json(lineItems)
       break;
     default:

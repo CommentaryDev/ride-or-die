@@ -53,6 +53,7 @@ model Order {
   nb_lines Int
   user_id  String
   createdAt   DateTime  @default(now())
+  OrderLines OrderLine[]
 }
 model OrderLine{
   id_orderline String   @id @default(uuid())
@@ -63,6 +64,7 @@ model OrderLine{
   unitPrice    Int
   lineTotal    Int
   createdAt   DateTime  @default(now())
+  order        Order     @relation(fields: [id_order], references: [id_order], onDelete: Cascade)
 }
 
 
