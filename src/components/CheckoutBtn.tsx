@@ -23,8 +23,7 @@ const CheckoutBtn = () => {
       );
 
       if (!stripe) throw new Error("Stripe failed to initialize.");
-
-      const checkoutResponse = await fetch(`${process.env.NEXTAUTH_URL}/api/stripe/createCheckout`, {
+      const checkoutResponse = await fetch("https://ride-or-die.benjaminroche.fr/api/stripe/createCheckout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
