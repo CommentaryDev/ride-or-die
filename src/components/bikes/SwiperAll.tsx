@@ -6,9 +6,8 @@ import Link from "next/link";
 import { Swiper ,SwiperSlide } from 'swiper/react';
 import BikeCard from './BikeCard';
 const Test = ({test} : any) => {
-    console.log(test);
   return (
-    <div className="grid sm:grid-rows-1 md:grid-rows-2 grid-rows-4 grid-flow-col gap-4">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-cols-1 grid-flow-row gap-4">
         {test.map((bike : any) => {
           return (
            <BikeCard bike={bike} />

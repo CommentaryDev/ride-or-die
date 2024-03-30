@@ -14,21 +14,27 @@ const CheckoutBtn = () => {
     //Return to login because not connected
     if (!session) {
       console.log("You're not connected");
-      router.push("https://ride-or-die.benjaminroche.fr/api/auth/signin");
+      router.push(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/signin`);
     }
+    
     //else create stripe checkout using API
     try {
+      const checkoutData = {
+        cartDetails: cartDetails,
+        email: session?.user?.email // assuming userEmail is the variable containing the user's email
+      };
+      
       const stripe = await loadStripe(
         process.env.NEXT_PUBLIC_TEST_STRIPE_PUBLISHABLE_KEY as string
       );
 
       if (!stripe) throw new Error("Stripe failed to initialize.");
-      const checkoutResponse = await fetch("https://ride-or-die.benjaminroche.fr/api/stripe/createCheckout", {
+      const checkoutResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stripe/createCheckout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cartDetails }),
+        body: JSON.stringify(checkoutData),
       });
 
       const { sessionId } = await checkoutResponse.json();

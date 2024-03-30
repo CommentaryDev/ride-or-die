@@ -12,9 +12,10 @@ const BannerCard = ({id,name , desc, img, path}:any) => {
             <div className="bg-primary/5 w-full h-full group-hover:bg-primary/10 transition-all duration-300 flex justify-center items-center">
                 <Link href={path} >
                 <Image 
-                    src={img}
-                    fill
-                    alt=''
+                src={img}
+                layout="fill"
+                objectFit="cover"
+                alt=""
                 />
                 </Link>
             </div>

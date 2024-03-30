@@ -5,26 +5,43 @@ const webhook : string = process.env.STRIPE_WEBHOOK_SECRET as string
 
 async function OrderCreate(lines : any,totalAmount : any, CustomerID: any){
   const numberItems= lines.length;
+  console.log(lines)
   console.log("amount",totalAmount)
   console.log("nb lines",numberItems)
-  const order = await prisma.order.create({
-    data: {
-      amount: totalAmount,
-      nb_lines: numberItems,
-      user_id: CustomerID
-    },
-  });
-  for (const element of lines) {
-    const lineorder = await prisma.orderLine.create({
+  const user = await prisma.user.findFirst({
+    where: {
+      email: CustomerID
+    }
+  })
+  if(user){
+    const order = await prisma.order.create({
       data: {
-        id_order: order.id_order,
-        product_name: element.description, 
-        stripe_id:element.price.id,
-        quantity:Number(element.quantity),
-        unitPrice: Number(element.price.unit_amount),
-        lineTotal: Number(element.amount_total),
+        amount: totalAmount,
+        nb_lines: numberItems,
+        user_id: user?.id,
+  
       },
-    });
+      });
+      for (const element of lines) {
+        const product = await prisma.products.findFirst({
+          where: {
+            price_id: element.price.id
+          }
+        })
+        if(product){
+          const lineorder = await prisma.orderLine.create({
+            data: {
+              id_order: order.id_order,
+              product_name: element.description, 
+              stripe_id:element.price.id,
+              quantity:Number(element.quantity),
+              unitPrice: Number(element.price.unit_amount),
+              lineTotal: Number(element.amount_total),
+              productId: product?.id_product,
+            },
+          });
+        }
+      }
   }
 }
 var nodemailer = require("nodemailer");
@@ -81,6 +98,7 @@ export async function POST(req: any, res: any) {
       break;
     // Add other event types to handle as needed
     case 'checkout.session.completed':
+      console.log("there")
       const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
         (event.data.object as any).id,
         {

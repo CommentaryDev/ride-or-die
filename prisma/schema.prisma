@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,52 +7,64 @@ datasource db {
   url      = "mysql://u467791759_benjiride:oJrniRnh8@193.203.168.2/u467791759_rideordie"
 }
 
-//Personals
 model Brands {
-  id_brand    String   @id @default(uuid())
-  name        String   @db.VarChar(50)
-  createdAt   DateTime @default(now())
-  products Products[]
+  id_brand  String     @id @default(uuid())
+  name      String     @db.VarChar(50)
+  createdAt DateTime   @default(now())
+  products  Products[]
 }
+
 model Categories {
-  id_category String   @id @default(uuid())
-  name        String   @db.VarChar(50)
-  createdAt   DateTime @default(now())
-  products Products[]
+  id_category String     @id @default(uuid())
+  name        String     @db.VarChar(50)
+  createdAt   DateTime   @default(now())
+  products    Products[] @relation("CategoriesToProducts")
 }
+
 model Products {
-  id_product  String   @id @default(uuid())
-  name        String   @db.VarChar(50)
-  desc        String   @db.VarChar(400)
-  imageURL    String   @db.VarChar(250)
-  published   Boolean  @default(false)
-  trending    Boolean  @default(false)
-  price       String  
+  id_product  String       @id @default(uuid())
+  name        String       @db.VarChar(50)
+  desc        String       @db.VarChar(400)
+  imageURL    String       @db.VarChar(250)
+  ImgPublicID String?      @db.VarChar(200)
+  published   Boolean      @default(false)
+  trending    Boolean      @default(false)
+  price       String
   price_id    String
   brand_id    String
   category_id String
   type_id     String
-  brand       Brands      @relation(fields: [brand_id], references: [id_brand])
-  category    Categories[]
-  type        Types       @relation(fields: [type_id], references: [id_type])
-  createdAt   DateTime    @default(now())
+  createdAt   DateTime     @default(now())
+  Favourite   Favourite[]
+  OrderLine   OrderLine[]
+  brand       Brands       @relation(fields: [brand_id], references: [id_brand])
+  type        Types        @relation(fields: [type_id], references: [id_type])
+  category    Categories[] @relation("CategoriesToProducts")
+
+  @@index([brand_id], map: "Products_brand_id_fkey")
+  @@index([type_id], map: "Products_type_id_fkey")
 }
+
 model Types {
-  id_type     String    @id @default(uuid())
-  name        String    @db.VarChar(50)
-  createdAt   DateTime  @default(now())
-  products    Products[]
+  id_type   String     @id @default(uuid())
+  name      String     @db.VarChar(50)
+  createdAt DateTime   @default(now())
+  products  Products[]
 }
 
 model Order {
-  id_order String   @id @default(uuid())
-  amount   Int 
-  nb_lines Int
-  user_id  String
-  createdAt   DateTime  @default(now())
+  id_order   String      @id @default(uuid())
+  amount     Int
+  nb_lines   Int
+  createdAt  DateTime    @default(now())
+  user_id    String
+  User       User        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   OrderLines OrderLine[]
+
+  @@index([user_id], map: "Order_userId_fkey")
 }
-model OrderLine{
+
+model OrderLine {
   id_orderline String   @id @default(uuid())
   id_order     String
   product_name String
@@ -63,13 +72,15 @@ model OrderLine{
   quantity     Int
   unitPrice    Int
   lineTotal    Int
-  createdAt   DateTime  @default(now())
-  order        Order     @relation(fields: [id_order], references: [id_order], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  productId    String
+  order        Order    @relation(fields: [id_order], references: [id_order], onDelete: Cascade)
+  Products     Products @relation(fields: [productId], references: [id_product])
+
+  @@index([id_order], map: "OrderLine_id_order_fkey")
+  @@index([productId], map: "OrderLine_productId_fkey")
 }
 
-
-
-//Required from next-auth
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -85,10 +96,10 @@ model Account {
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId], map: "Account_userId_fkey")
 }
 
 model Session {
@@ -97,15 +108,20 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?     @unique
   emailVerified DateTime?
   image         String?
+  CustomerID    String?     @db.VarChar(150)
   accounts      Account[]
+  Favourite     Favourite[]
+  Order         Order[]
   sessions      Session[]
 }
 
@@ -115,4 +131,15 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Favourite {
+  id_favourite String   @id
+  productId    String
+  userId       String
+  Products     Products @relation(fields: [productId], references: [id_product])
+  User         User     @relation(fields: [userId], references: [id])
+
+  @@index([productId], map: "Favourite_productId_fkey")
+  @@index([userId], map: "Favourite_userId_fkey")
 }
