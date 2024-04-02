@@ -60,6 +60,7 @@ model Order {
   user_id    String
   User       User        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   OrderLines OrderLine[]
+  PaymentIntentID String?
 
   @@index([user_id], map: "Order_userId_fkey")
 }

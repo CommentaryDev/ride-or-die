@@ -7,20 +7,16 @@ import prisma from "@/lib/prisma";
 export async function POST(req: NextRequest, res: NextResponse) {
     const headersList = headers();
     const {cartDetails, email} = await req.json();
+    console.log("cartDetails",cartDetails)
     const cartDetailsArray = Object.values(cartDetails) ;
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
     const lineItems = cartDetailsArray.map((item: any) => {
         return {
-            price_data: {
-                currency: item.currency,
-                product_data: {
-                    name: item.name,
-                },
-                unit_amount: item.price,
-            },
+            price: item.id,
             quantity: item.quantity,
         };
     });
+    console.log("lineitems test",lineItems)
     let customerId;
     const user = await prisma.user.findFirst({
         where: {

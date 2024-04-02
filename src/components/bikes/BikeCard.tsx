@@ -9,7 +9,7 @@ const BikeCard = ({ bike }: any) => {
   const test = parseFloat(bike.price as string);
 const formatted = new Intl.NumberFormat("fr", {
   style: "currency",
-  currency: "EUR",
+  currency: "USD",
   minimumFractionDigits: test % 1 === 0 ? 0 : 2, // Check if the number has fractional part
 }).format(test);
 
@@ -43,7 +43,7 @@ const formatted = new Intl.NumberFormat("fr", {
       </div>
       <h4 className='mb-1'>{bike.name}</h4>
       <div className='text-lg font-bold text-accent'>
-        A partir de {formatted} 
+        From {formatted} 
       </div>
     </div>
   );

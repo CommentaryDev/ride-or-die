@@ -5,9 +5,14 @@ import Image from "next/image";
 export const dynamic = 'force-dynamic'
 export default async function Orders () {
     const session = await getServerSession(authOptions);
+    const user = await prisma.user.findFirst({
+        where: {
+            email: session?.user?.email
+        }
+    })
     const orders= await prisma.order.findMany({
         where: {
-          user_id: session?.user?.email as string,
+          user_id: user?.id as string,
         }
       })
       return (

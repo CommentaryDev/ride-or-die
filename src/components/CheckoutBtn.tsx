@@ -19,6 +19,7 @@ const CheckoutBtn = () => {
     
     //else create stripe checkout using API
     try {
+      console.log("cartDetailsBTN",cartDetails)
       const checkoutData = {
         cartDetails: cartDetails,
         email: session?.user?.email // assuming userEmail is the variable containing the user's email
@@ -38,7 +39,6 @@ const CheckoutBtn = () => {
       });
 
       const { sessionId } = await checkoutResponse.json();
-      console.log(sessionId)
       const stripeError = await stripe.redirectToCheckout({ sessionId });
 
       if (stripeError) {
