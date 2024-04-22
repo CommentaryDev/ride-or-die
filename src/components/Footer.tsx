@@ -89,7 +89,7 @@ const Footer = () => {
               </svg>
               Ride Or Die
             </h6>
-            <p>Best website ever</p>
+            <p>Get what you need here</p>
           </div>
           <div className="">
             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
