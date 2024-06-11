@@ -205,12 +205,20 @@ export async function POST(req: any, res: any) {
           PaymentIntentID:session.id,
         }
       })
+      const customer = await stripe.customers.retrieve(session.customer as string);
+      
       if(order){
         //Creating invoice pdf
         const invoiceFilename = await createInvoice(order);
         console.log("Invoice created")
         //Email send
-        sendEmailWithAttachment(invoiceFilename, session.receipt_email as string);
+        if (customer.deleted === true) {
+          // TypeScript treats customer as Stripe.DeletedCustomer
+        } else {
+          // TypeScript treats customer as Stripe.Customer
+          sendEmailWithAttachment(invoiceFilename, customer?.email as string);
+        }
+       
       }
      
     
