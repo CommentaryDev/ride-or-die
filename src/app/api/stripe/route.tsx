@@ -210,7 +210,7 @@ export async function POST(req: any, res: any) {
         const invoiceFilename = await createInvoice(order);
         console.log("Invoice created")
         //Email send
-        sendEmailWithAttachment(invoiceFilename, 'ben77les@gmail.com');
+        sendEmailWithAttachment(invoiceFilename, session.receipt_email as string);
       }
      
     
