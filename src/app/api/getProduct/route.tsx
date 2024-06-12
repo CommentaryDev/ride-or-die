@@ -5,16 +5,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const body = await req.json();
         console.log(body);  
         try{
-            const orders= await prisma.order.findMany({
+            const product= await prisma.products.findMany({
                 where: {
-                    user_id: body,
-                },
-                orderBy:{
-                    createdAt:'desc',
+                    id_product: body,
                 }
               })
               
-        return NextResponse.json(orders);
+        return NextResponse.json(product);
     } catch (err) {
         console.error(err);
         return NextResponse.error();

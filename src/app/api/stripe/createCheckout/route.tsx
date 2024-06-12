@@ -12,8 +12,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
     const lineItems = cartDetailsArray.map((item: any) => {
         return {
-            price: item.id,
-            quantity: item.quantity,
+            price: item.id as string,
+            quantity: item.quantity as string,
         };
     });
     console.log("lineitems test",lineItems)
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             customer: customerId,
         });
 
-        return NextResponse.json({sessionId: session.id});
+        return NextResponse.json({sessionId: session.id, url: session.url});
     } catch (err) {
         console.log(err)
         return NextResponse.json({error: "Error creating checkout session"});
