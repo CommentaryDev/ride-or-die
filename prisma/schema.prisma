@@ -105,7 +105,7 @@ model VerificationToken {
 }
 
 model Order {
-  id_order        String      @id
+  id_order        String      @id @default(uuid())
   amount          Int
   nb_lines        Int
   createdAt       DateTime    @default(now())
@@ -118,7 +118,7 @@ model Order {
 }
 
 model OrderLine {
-  id_orderline String   @id
+  id_orderline String   @id @default(uuid())
   id_order     String
   product_name String
   stripe_id    String
