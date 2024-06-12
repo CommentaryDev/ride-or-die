@@ -12,8 +12,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
     const lineItems = cartDetailsArray.map((item: any) => {
         return {
-            price: item.id as string,
-            quantity: item.quantity as string,
+            price: item.id,
+            quantity: item.quantity,
         };
     });
     console.log("lineitems test",lineItems)
